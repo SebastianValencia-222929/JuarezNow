@@ -1,0 +1,304 @@
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --azul-oscuro: #27374D;
+    --azul-medio: #526D82;
+    --gris-casi-blanco: #f8f9fa;
+    --gris-claro: #f5f5f5;
+    --blanco: #ffffff;
+    --texto: #27374D;
+    --borde-suave: #e9ecef;
+}
+
+/* ==========================================
+   ESTILOS BASE
+   ========================================== */
+body {
+    margin: 0;
+    background-color: var(--blanco);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+}
+
+/* ==========================================
+   HEADER 
+   ========================================== */
+header {
+    background-color: var(--azul-oscuro);
+    color: white;
+    margin: 0;
+    padding: 16px 20px;
+    width: 100%;
+}
+
+/* ==========================================
+   NAVEGACIÓN 
+   ========================================== */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+}
+
+nav a:hover {
+    background-color: var(--azul-medio);
+    color: white;
+}
+
+
+header .navbar {
+    background-color: var(--azul-oscuro);
+    padding: 0;
+}
+
+header .navbar-brand,
+header .navbar .nav-link {
+    color: white;
+}
+
+header .navbar .nav-link:hover {
+    color: var(--gris-claro);
+}
+
+header .navbar .nav-link.active {
+    color: white !important;
+}
+
+header .navbar-toggler {
+    border-color: white;
+}
+
+header .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Perfil - Icono de usuario */
+header .profile-icon i {
+    font-size: 1.8rem;
+    transition: all 0.3s ease-in-out;
+    color: white;
+}
+
+header .profile-icon.active i,
+header .profile-icon:hover i {
+    font-size: 2rem;
+    background-color: var(--azul-medio);
+    border-radius: 50%;
+    padding: 2px;
+    color: white;
+}
+
+/*
+   CONTENIDO PRINCIPAL
+    */
+main {
+    padding: 20px;
+}
+
+/* Secciones y artículos */
+section,
+article {
+    background-color: var(--gris-casi-blanco);
+    border: 1px solid var(--borde-suave);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(39, 55, 77, 0.04);
+}
+
+section h3,
+article h4 {
+    color: var(--azul-oscuro);
+    margin-top: 0;
+}
+
+/* Secciones específicas */
+#noticias,
+#reportes-recientes {
+    background-color: var(--gris-casi-blanco);
+}
+
+#noticias > h3 {
+    margin-top: 0;
+    padding: 16px;
+    text-align: center;
+    background-color: var(--azul-oscuro);
+    color: white;
+    border-radius: 8px;
+}
+
+/* IMÁGENES */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--borde-suave);
+    transition: all 0.3s ease-in-out;
+}
+
+img:hover {
+    transform: scale(1.03, 1.03);
+}
+
+.seleccion-img {
+    width: 500px;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* 
+   TABLAS
+    */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--blanco);
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+th,
+td {
+    border: 1px solid var(--borde-suave);
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--azul-oscuro);
+    color: white;
+}
+
+tr:nth-child(even) td {
+    background-color: var(--gris-casi-blanco);
+}
+
+/* 
+   BOTONES
+    */
+.btn,
+.boton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--azul-oscuro);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    border: 1px solid var(--azul-medio);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover,
+.boton:hover {
+    background-color: var(--azul-medio);
+}
+
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+footer {
+    background-color: var(--azul-oscuro);
+    color: white;
+    padding: 16px 20px;
+    text-align: center;
+}
+
+footer p {
+    margin: 6px 0;
+}
+
+/* utilidades previamente no usadas removed to simplify stylesheet */
+
+/* ==========================================
+   SOBRESCRITURA DE BOOTSTRAP CON CLASES
+   ========================================== */
+main .bg-white {
+    background-color: var(--gris-casi-blanco);
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+
+main .bg-light {
+    background-color: var(--gris-casi-blanco);
+    border: 1px solid var(--borde-suave);
+    border-radius: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    padding: 1.5rem;
+}
+
+
+/* Tamaño base para todos los textos */
+.card .card-text,
+.card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Títulos de categoría */
+.card .card-title,
+.card-header span {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+/* Badges de tiempo */
+.card-header .badge {
+    font-size: 0.8rem;
+}
+
+/* Botón "Ver en mapa"*/
+.card .btn {
+    font-size: 0.95rem;
+    padding: 0.4rem 1.2rem;
+}
+
+/* Para el index */
+#reportes-recientes .card-text,
+#reportes-recientes p {
+    font-size: 0.95rem;
+}
+
+
+
+/* ==========================================
+   14. RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+    .seleccion-img {
+        width: 100%;
+        height: auto;
+    }
+
+    section,
+    article {
+        padding: 14px;
+    }
+
+    .card-juarez {
+        padding: 1rem;
+    }
+
+    .card .card-text,
+    .card p {
+        font-size: 0.9rem;
+    }
+}

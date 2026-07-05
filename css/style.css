@@ -277,6 +277,41 @@ main .bg-light {
     font-size: 0.95rem;
 }
 
+/* ==========================================
+   PAGINACIÓN
+   ========================================== */
+.pagination {
+    gap: 0.5rem;
+}
+
+.page-item .page-link {
+    color: var(--texto);
+    background-color: var(--gris-casi-blanco);
+    border: 1px solid var(--borde-suave);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+.page-item .page-link:hover {
+    background-color: var(--azul-medio);
+    color: white;
+    border-color: var(--azul-medio);
+}
+
+.page-item.active .page-link {
+    background-color: var(--azul-oscuro);
+    border-color: var(--azul-oscuro);
+    color: white;
+}
+
+.page-item.disabled .page-link {
+    background-color: var(--gris-claro);
+    color: #999;
+    border-color: var(--borde-suave);
+    cursor: not-allowed;
+}
+
 
 
 /* ==========================================

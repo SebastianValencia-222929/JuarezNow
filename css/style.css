@@ -176,7 +176,7 @@ table {
 th,
 td {
     border: 1px solid var(--borde-suave);
-    padding: 10px;
+    padding: 12px 16px;
     text-align: left;
 }
 
@@ -187,6 +187,37 @@ th {
 
 tr:nth-child(even) td {
     background-color: var(--gris-casi-blanco);
+}
+
+/* Custom Table Overrides & Helpers */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--borde-suave);
+}
+
+.table thead th {
+    background-color: var(--azul-oscuro) !important;
+    color: white !important;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.table tbody tr:hover td {
+    background-color: var(--gris-claro) !important;
+}
+
+.img-tabla-incidente {
+    width: 90px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+.table td .badge {
+    font-size: 0.9rem;
+    padding: 6px 12px;
 }
 
 /* 

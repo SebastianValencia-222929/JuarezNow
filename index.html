@@ -130,113 +130,101 @@
             </div>
 
             <div class="bg-white p-4 rounded-4 shadow-sm">
-                <div class="row g-3">
-
-                    <article class="col-12">
-                        <div class="card shadow-sm rounded-3 overflow-hidden">
-                            <div class="card-header text-dark d-flex justify-content-between align-items-center">
-                                <span>
-                                    <i class="fas fa-car-crash me-2"></i>
-                                    Accidente
-                                </span>
-                                <span class="badge bg-light text-dark rounded-pill">28 de junio de 2026</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-md-8">
-                                        <p class="card-text mb-2">
-                                            <strong>Descripción:</strong> Choque entre dos vehículos en Av. De las
-                                            Torres.
-                                        </p>
-                                        <p class="card-text mb-0">
-                                            <strong>Ubicación:</strong>
-                                            <i class=" text-danger me-1"></i>
-                                            Av. De las Torres &amp; Calle 20
-                                        </p>
-                                        <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
-                                            <i class="fas fa-map me-2"></i>
-                                            Ver en mapa
-                                        </a>
-                                    </div>
-                                    <div class="col-md-4 mt-3 mt-md-0">
-                                        <img src="img/choque.jpg" class="img-fluid rounded-3 shadow-sm" alt="Accidente"
-                                            style="height: 120px; width: 100%; object-fit: cover;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="col-12">
-                        <div class="card shadow-sm rounded-3 overflow-hidden">
-                            <div class="card-header  text-dark d-flex justify-content-between align-items-center">
-                                <span>
-                                    <i class="fas fa-water me-2"></i>
-                                    Inundación
-                                </span>
-                                <span class="badge bg-light text-dark rounded-pill">28 de junio de 2026</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-md-8">
-                                        <p class="card-text mb-2">
-                                            <strong>Descripción:</strong> Avenida inundada debido a la intensa lluvia,
-                                            se recomienda evitar la zona.
-                                        </p>
-                                        <p class="card-text mb-0">
-                                            <strong>Ubicación:</strong>
-                                            <i class=" text-danger me-1"></i>
-                                            Eje Juan Gabriel y Vicente Guerrero
-                                        </p>
-                                        <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
-                                            <i class="fas fa-map me-2"></i>
-                                            Ver en mapa
-                                        </a>
-                                    </div>
-                                    <div class="col-md-4 mt-3 mt-md-0">
-                                        <img src="img/inundacion.jpg" class="img-fluid rounded-3 shadow-sm"
-                                            alt="Inundación" style="height: 120px; width: 100%; object-fit: cover;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="col-12">
-                        <div class="card shadow-sm rounded-3 overflow-hidden">
-                            <div class="card-header text-dark d-flex justify-content-between align-items-center">
-                                <span>
-                                    <i class="fas fa-traffic-light me-2"></i>
-                                    Tráfico
-                                </span>
-                                <span class="badge bg-light text-dark rounded-pill">28 de junio de 2026</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-md-8">
-                                        <p class="card-text mb-2">
-                                            <strong>Descripción:</strong> Tráfico congestionado en Paseo Triunfo, se
-                                            desconoce el motivo.
-                                        </p>
-                                        <p class="card-text mb-0">
-                                            <strong>Ubicación:</strong>
-                                            <i class=" text-danger me-1"></i>
-                                            Paseo Triunfo &amp; Calle Francia
-                                        </p>
-                                        <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
-                                            <i class="fas fa-map me-2"></i>
-                                            Ver en mapa
-                                        </a>
-                                    </div>
-                                    <div class="col-md-4 mt-3 mt-md-0">
-                                        <img src="img/trafico.jpg" class="img-fluid rounded-3 shadow-sm" alt="Tráfico"
-                                            style="height: 120px; width: 100%; object-fit: cover;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 12%;">Imagen</th>
+                                <th scope="col" style="width: 18%;">Tipo</th>
+                                <th scope="col" style="width: 45%;">Descripción e Ubicación</th>
+                                <th scope="col" style="width: 15%;">Fecha</th>
+                                <th scope="col" style="width: 10%;" class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="img/choque.jpg" class="img-tabla-incidente shadow-sm" alt="Accidente">
+                                </td>
+                                <td>
+                                    <span class="fw-bold text-dark d-flex align-items-center">
+                                        <i class="fas fa-car-crash text-danger me-2"></i>
+                                        Accidente
+                                    </span>
+                                </td>
+                                <td>
+                                    <p class="mb-1 text-muted">Choque entre dos vehículos en Av. De las Torres.</p>
+                                    <span class="text-secondary small">
+                                        <i class="fas fa-map-marker-alt text-danger me-1"></i>
+                                        Av. De las Torres &amp; Calle 20
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-light text-dark border rounded-pill">28 de junio de 2026</span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="resources/mapa.html" class="btn btn-primary btn-sm rounded-pill px-3">
+                                        <i class="fas fa-map me-1"></i>
+                                        Ver
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="img/inundacion.jpg" class="img-tabla-incidente shadow-sm" alt="Inundación">
+                                </td>
+                                <td>
+                                    <span class="fw-bold text-dark d-flex align-items-center">
+                                        <i class="fas fa-water text-primary me-2"></i>
+                                        Inundación
+                                    </span>
+                                </td>
+                                <td>
+                                    <p class="mb-1 text-muted">Avenida inundada debido a la intensa lluvia, se recomienda evitar la zona.</p>
+                                    <span class="text-secondary small">
+                                        <i class="fas fa-map-marker-alt text-danger me-1"></i>
+                                        Eje Juan Gabriel y Vicente Guerrero
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-light text-dark border rounded-pill">28 de junio de 2026</span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="resources/mapa.html" class="btn btn-primary btn-sm rounded-pill px-3">
+                                        <i class="fas fa-map me-1"></i>
+                                        Ver
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="img/trafico.jpg" class="img-tabla-incidente shadow-sm" alt="Tráfico">
+                                </td>
+                                <td>
+                                    <span class="fw-bold text-dark d-flex align-items-center">
+                                        <i class="fas fa-traffic-light text-warning me-2"></i>
+                                        Tráfico
+                                    </span>
+                                </td>
+                                <td>
+                                    <p class="mb-1 text-muted">Tráfico congestionado en Paseo Triunfo, se desconoce el motivo.</p>
+                                    <span class="text-secondary small">
+                                        <i class="fas fa-map-marker-alt text-danger me-1"></i>
+                                        Paseo Triunfo &amp; Calle Francia
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-light text-dark border rounded-pill">28 de junio de 2026</span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="resources/mapa.html" class="btn btn-primary btn-sm rounded-pill px-3">
+                                        <i class="fas fa-map me-1"></i>
+                                        Ver
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <!-- Ver todos -->

@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand text-white fw-bold" href="#">
+                <a class="navbar-brand text-white fw-bold" href="index.html">
                     JuárezNow
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
@@ -46,30 +46,79 @@
         </nav>
     </header>
 
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section text-center text-white" style="background-image: url('img/flood.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <span class="badge rounded-pill mb-3">
+                <i class="fas fa-bullhorn text-warning me-2"></i>JuárezNow Activo
+            </span>
+            <h1 class="display-4 fw-extrabold text-white">
+                Reporta y visualiza incidentes en tiempo real
+            </h1>
+            <p class="lead text-white-50 mx-auto" style="max-width: 700px;">
+                Consulta inundaciones, accidentes viales, semáforos dañados y hundimientos en Ciudad Juárez. Apoya a tu comunidad reportando incidentes al instante.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="resources/reportar.html" class="btn btn-dark btn-lg rounded-pill px-4 py-3 shadow-sm border-0" style="background-color: var(--azul-oscuro);">
+                    <i class="fas fa-plus-circle me-2"></i>Reportar incidente
+                </a>
+                <a href="resources/mapa.html" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3">
+                    <i class="fas fa-map-marked-alt me-2"></i>Ver mapa en vivo
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!--MAIN-->
     <main class="container py-4">
 
-        <section class="mb-5">
-            <div class="row align-items-center g-4">
-                <div class="col-md-6">
-                    <h2 class="display-6 fw-bold ">
-                        Reporta y visualiza incidentes en tiempo real
-                    </h2>
-                    <p class="lead text-muted">
-                        Reporta y consulta accidentes, inundaciones, semáforos dañados y hundimientos en Ciudad Juárez.
-                        <br>
-                    <p class="lead text-muted">Apoya a tu comunidad</p>
-                    </p>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                        <a href="resources/reportar.html" class="btn rounded-pill">
-                            <i class="fas fa-plus-circle me-2"></i>
-                            Reportar incidente
-                        </a>
+        <!-- ===== CARACTERÍSTICAS PRINCIPALES ===== -->
+        <section class="mb-5 border-0 bg-transparent p-0 shadow-none">
+            <div class="row g-3">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="feature-card d-flex align-items-center h-100">
+                        <div class="feature-icon-wrapper me-3">
+                            <i class="fas fa-bolt fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Reporte veloz</h6>
+                            <p class="text-muted small mb-0">Sube alertas en segundos</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <img src="img/flood.jpg" class="img-fluid rounded-4 shadow-lg" alt="Imagen de Ciudad Juárez"
-                        style="max-height: 300px; width: 100%; object-fit: cover;">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="feature-card d-flex align-items-center h-100">
+                        <div class="feature-icon-wrapper me-3">
+                            <i class="fas fa-map-marked-alt fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Geolocalización</h6>
+                            <p class="text-muted small mb-0">Visualiza en mapa interactivo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="feature-card d-flex align-items-center h-100">
+                        <div class="feature-icon-wrapper me-3">
+                            <i class="fas fa-users fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Colaborativo</h6>
+                            <p class="text-muted small mb-0">Apoyo mutuo ciudadano</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="feature-card d-flex align-items-center h-100">
+                        <div class="feature-icon-wrapper me-3">
+                            <i class="fas fa-shield-alt fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Acceso libre</h6>
+                            <p class="text-muted small mb-0">Consulta sin registrarte</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -86,37 +135,50 @@
 
             <div class="row g-3">
                 <div class="col-md-3 col-6">
-                    <div class="card  text-dark text-center h-100 shadow-sm rounded-3">
-                        <div class="card-body">
-                            <h3 class="display-6 fw-bold">3</h3>
-                            <p class="mb-0">Accidentes</p>
+                    <div class="feature-card d-flex align-items-center h-100">
+                        <div class="feature-icon-wrapper me-3">
+                            <i class="fas fa-car-crash fa-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="display-6 fw-bold mb-0">3</h3>
+                            <p class="text-muted small mb-0">Accidentes</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
-                    <div class="card text-dark text-center h-100 shadow-sm rounded-3">
-                        <div class="card-body">
-                            <h3 class="display-6 fw-bold">5</h3>
-                            <p class="mb-0">Inundaciones</p>
+                    <div class="feature-card d-flex align-items-center h-100">
+                        <div class="feature-icon-wrapper me-3">
+                            <i class="fas fa-water fa-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="display-6 fw-bold mb-0">5</h3>
+                            <p class="text-muted small mb-0">Inundaciones</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
-                    <div class="card text-dark text-center h-100 shadow-sm rounded-3">
-                        <div class="card-body">
-                            <h3 class="display-6 fw-bold">4</h3>
-                            <p class="mb-0">Tráfico</p>
+                    <div class="feature-card d-flex align-items-center h-100">
+                        <div class="feature-icon-wrapper me-3">
+                            <i class="fas fa-traffic-light fa-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="display-6 fw-bold mb-0">4</h3>
+                            <p class="text-muted small mb-0">Tráfico</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
-                    <div class="card text-dark text-center h-100 shadow-sm rounded-3">
-                        <div class="card-body">
-                            <h3 class="display-6 fw-bold">2</h3>
-                            <p class="mb-0">Hundimientos</p>
+                    <div class="feature-card d-flex align-items-center h-100">
+                        <div class="feature-icon-wrapper me-3">
+                            <i class="fas fa-circle-exclamation fa-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="display-6 fw-bold mb-0">2</h3>
+                            <p class="text-muted small mb-0">Hundimientos</p>
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
 
         <!-- ===== EVENTOS RECIENTES ===== -->

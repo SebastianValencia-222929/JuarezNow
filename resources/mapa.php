@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand text-white fw-bold" href="../index.html">
+                <a class="navbar-brand text-white fw-bold" href="../index.php">
                     JuárezNow
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
@@ -23,20 +23,20 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="../index.html">Inicio</a>
+                            <a class="nav-link" href="../index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="mapa.html">Mapa</a>
+                            <a class="nav-link active" href="mapa.php">Mapa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="reportes.html">Reportes</a>
+                            <a class="nav-link" href="reportes.php">Reportes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="reportar.html">Reportar</a>
+                            <a class="nav-link" href="reportar.php">Reportar</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a class="nav-link profile-icon" href="iniciar_sesion.html">
+                        <a class="nav-link profile-icon" href="iniciar_sesion.php">
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </span>

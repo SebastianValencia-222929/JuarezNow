@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand text-white fw-bold" href="../index.html">
+                <a class="navbar-brand text-white fw-bold" href="../index.php">
                     JuárezNow
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
@@ -24,20 +24,20 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="../index.html">Inicio</a>
+                            <a class="nav-link" href="../index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="mapa.html">Mapa</a>
+                            <a class="nav-link" href="mapa.php">Mapa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="reportes.html">Reportes</a>
+                            <a class="nav-link active" href="reportes.php">Reportes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="reportar.html">Reportar</a>
+                            <a class="nav-link" href="reportar.php">Reportar</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a class="nav-link profile-icon" href="iniciar_sesion.html">
+                        <a class="nav-link profile-icon" href="iniciar_sesion.php">
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </span>
@@ -59,7 +59,7 @@
                 <p class="text-muted mt-1">Visualiza todos los incidentes reportados por la comunidad</p>
             </div>
             <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                <a href="reportar.html" class="btn btn-dark btn-lg rounded-pill">
+                <a href="reportar.php" class="btn btn-dark btn-lg rounded-pill">
                     <i class="fas fa-plus-circle me-2"></i>
                     Crear reporte
                 </a>
@@ -93,7 +93,7 @@
                                         <i class=" text-danger me-1"></i>
                                         Av. De las Torres &amp; Calle 20
                                     </p>
-                                    <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
+                                    <a href="mapa.php" class="btn btn-primary btn-sm rounded-pill mt-3">
                                         <i class="fas fa-map me-2"></i>
                                         Ver en mapa
                                     </a>
@@ -132,7 +132,7 @@
                                         <i class=" text-danger me-1"></i>
                                         Eje Juan Gabriel y Vicente Guerrero
                                     </p>
-                                    <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
+                                    <a href="mapa.php" class="btn btn-primary btn-sm rounded-pill mt-3">
                                         <i class="fas fa-map me-2"></i>
                                         Ver en mapa
                                     </a>
@@ -169,7 +169,7 @@
                                         <i class=" text-danger me-1"></i>
                                         Paseo Triunfo &amp; Calle Francia
                                     </p>
-                                    <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
+                                    <a href="mapa.php" class="btn btn-primary btn-sm rounded-pill mt-3">
                                         <i class="fas fa-map me-2"></i>
                                         Ver en mapa
                                     </a>
@@ -206,7 +206,7 @@
                                         <i class=" text-danger me-1"></i>
                                         Av. Insurgentes #2345
                                     </p>
-                                    <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
+                                    <a href="mapa.php" class="btn btn-primary btn-sm rounded-pill mt-3">
                                         <i class="fas fa-map me-2"></i>
                                         Ver en mapa
                                     </a>
@@ -242,7 +242,7 @@
                                         <i class=" text-danger me-1"></i>
                                         Periférico de la Juventud
                                     </p>
-                                    <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
+                                    <a href="mapa.php" class="btn btn-primary btn-sm rounded-pill mt-3">
                                         <i class="fas fa-map me-2"></i>
                                         Ver en mapa
                                     </a>
@@ -278,7 +278,7 @@
                                         <i class=" text-danger me-1"></i>
                                         Valle del Sol
                                     </p>
-                                    <a href="mapa.html" class="btn btn-primary btn-sm rounded-pill mt-3">
+                                    <a href="mapa.php" class="btn btn-primary btn-sm rounded-pill mt-3">
                                         <i class="fas fa-map me-2"></i>
                                         Ver en mapa
                                     </a>

@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand text-white fw-bold" href="index.html">
+                <a class="navbar-brand text-white fw-bold" href="index.php">
                     JuárezNow
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
@@ -24,20 +24,20 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Inicio</a>
+                            <a class="nav-link active" href="index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="resources/mapa.html">Mapa</a>
+                            <a class="nav-link" href="resources/mapa.php">Mapa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="resources/reportes.html">Reportes</a>
+                            <a class="nav-link" href="resources/reportes.php">Reportes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="resources/reportar.html">Reportar</a>
+                            <a class="nav-link" href="resources/reportar.php">Reportar</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a class="nav-link profile-icon" href="resources/iniciar_sesion.html">
+                        <a class="nav-link profile-icon" href="resources/iniciar_sesion.php">
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </span>
@@ -60,10 +60,10 @@
                 Consulta inundaciones, accidentes viales, semáforos dañados y hundimientos en Ciudad Juárez. Apoya a tu comunidad reportando incidentes al instante.
             </p>
             <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <a href="resources/reportar.html" class="btn btn-dark btn-lg rounded-pill px-4 py-3 shadow-sm border-0" style="background-color: var(--azul-oscuro);">
+                <a href="resources/reportar.php" class="btn btn-dark btn-lg rounded-pill px-4 py-3 shadow-sm border-0" style="background-color: var(--azul-oscuro);">
                     <i class="fas fa-plus-circle me-2"></i>Reportar incidente
                 </a>
-                <a href="resources/mapa.html" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3">
+                <a href="resources/mapa.php" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3">
                     <i class="fas fa-map-marked-alt me-2"></i>Ver mapa en vivo
                 </a>
             </div>
@@ -225,7 +225,7 @@
                                     <span class="badge bg-light text-dark border rounded-pill">28 de junio de 2026</span>
                                 </td>
                                 <td class="text-center">
-                                    <a href="resources/mapa.html" class="btn btn-primary btn-sm rounded-pill px-3">
+                                    <a href="resources/mapa.php" class="btn btn-primary btn-sm rounded-pill px-3">
                                         <i class="fas fa-map me-1"></i>
                                         Ver
                                     </a>
@@ -252,7 +252,7 @@
                                     <span class="badge bg-light text-dark border rounded-pill">28 de junio de 2026</span>
                                 </td>
                                 <td class="text-center">
-                                    <a href="resources/mapa.html" class="btn btn-primary btn-sm rounded-pill px-3">
+                                    <a href="resources/mapa.php" class="btn btn-primary btn-sm rounded-pill px-3">
                                         <i class="fas fa-map me-1"></i>
                                         Ver
                                     </a>
@@ -279,7 +279,7 @@
                                     <span class="badge bg-light text-dark border rounded-pill">28 de junio de 2026</span>
                                 </td>
                                 <td class="text-center">
-                                    <a href="resources/mapa.html" class="btn btn-primary btn-sm rounded-pill px-3">
+                                    <a href="resources/mapa.php" class="btn btn-primary btn-sm rounded-pill px-3">
                                         <i class="fas fa-map me-1"></i>
                                         Ver
                                     </a>
@@ -292,7 +292,7 @@
                 <!-- Ver todos -->
                 <div class="row mt-4">
                     <div class="col-12 text-center">
-                        <a href="resources/reportes.html" class="btn rounded-pill">
+                        <a href="resources/reportes.php" class="btn rounded-pill">
                             <i class="fas fa-list me-2"></i>
                             Ver todos los reportes
                         </a>
@@ -314,7 +314,7 @@
                         <p class="text-muted">Aquí se mostrarán los incidentes geolocalizados</p>
                         <p class="text-muted small">Próximamente: Integración con Leaflet y OpenStreetMap</p>
                         <br>
-                        <a href="resources/mapa.html" class="btn rounded-pill">
+                        <a href="resources/mapa.php" class="btn rounded-pill">
                             <i class="fas fa-map-marked-alt me-2"></i>
                             Explorar mapa
                         </a>

@@ -1,6 +1,29 @@
 <?php
 session_start();
 include('../../Backend/conexion.php');
+
+// Paginación
+$reportes_por_pagina = 4;
+
+// Obtener total de reportes
+$sql_total = "SELECT COUNT(*) as total FROM reportes";
+$result_total = $conexion->query($sql_total);
+$row_total = $result_total->fetch_assoc();
+$total_reportes = $row_total['total'];
+
+// Calcular total de páginas
+$total_paginas = ceil($total_reportes / $reportes_por_pagina);
+
+// Página actual
+$pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+if ($pagina_actual < 1) {
+    $pagina_actual = 1;
+} elseif ($pagina_actual > $total_paginas && $total_paginas > 0) {
+    $pagina_actual = $total_paginas;
+}
+
+// Calcular offset
+$offset = ($pagina_actual - 1) * $reportes_por_pagina;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -77,7 +100,7 @@ include('../../Backend/conexion.php');
             <div class="row g-3">
 
                 <?php
-                $sql = "SELECT r.*, u.nombre, u.apellido FROM reportes r LEFT JOIN usuarios u ON r.usuario_id = u.id ORDER BY r.fecha_creacion DESC";
+                $sql = "SELECT r.*, u.nombre, u.apellido FROM reportes r LEFT JOIN usuarios u ON r.usuario_id = u.id ORDER BY r.fecha_creacion DESC LIMIT $reportes_por_pagina OFFSET $offset";
                 $resultado = $conexion->query($sql);
 
                 if ($resultado && $resultado->num_rows > 0) {
@@ -149,11 +172,10 @@ include('../../Backend/conexion.php');
                                                 Ver en mapa
                                             </a>
                                         </div>
-                                        <div class="col-md-4 mt-3 mt-md-0">
+                                        <div class="col-md-4 mt-3 mt-md-0 d-flex justify-content-md-end">
                                             <img src="<?php echo $img_src; ?>" 
-                                                 class="img-fluid rounded-3 shadow-sm" 
-                                                 alt="<?php echo $tipo_str; ?>"
-                                                 style="height: 120px; width: 100%; object-fit: cover;">
+                                                 class="img-tabla-incidente shadow-sm" 
+                                                 alt="<?php echo $tipo_str; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -175,23 +197,32 @@ include('../../Backend/conexion.php');
             </div>
 
             <!-- PAGINACIÓN -->
+            <?php if ($total_paginas > 1): ?>
             <div class="row mt-4">
                 <div class="col-12">
                     <nav aria-label="Navegación de reportes">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                            <!-- Anterior -->
+                            <li class="page-item <?php echo ($pagina_actual <= 1) ? 'disabled' : ''; ?>">
+                                <a class="page-link" href="<?php echo ($pagina_actual <= 1) ? '#' : '?pagina=' . ($pagina_actual - 1); ?>" tabindex="-1" <?php echo ($pagina_actual <= 1) ? 'aria-disabled="true"' : ''; ?>>Anterior</a>
                             </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Siguiente</a>
+                            
+                            <!-- Páginas -->
+                            <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                                <li class="page-item <?php echo ($pagina_actual == $i) ? 'active' : ''; ?>">
+                                    <a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
+                            <?php endfor; ?>
+                            
+                            <!-- Siguiente -->
+                            <li class="page-item <?php echo ($pagina_actual >= $total_paginas) ? 'disabled' : ''; ?>">
+                                <a class="page-link" href="<?php echo ($pagina_actual >= $total_paginas) ? '#' : '?pagina=' . ($pagina_actual + 1); ?>">Siguiente</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
 
 

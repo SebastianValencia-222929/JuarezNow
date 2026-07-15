@@ -1,3 +1,6 @@
+<?php
+include_once('../../Backend/seguridad.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -64,11 +67,35 @@
             </div>
         </div>
 
+        <!-- ALERTAS DINÁMICAS DE ERROR/ÉXITO -->
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <?php
+                        $err = $_GET['error'];
+                        if ($err === 'csrf') echo 'Sesión o formulario expirado. Intente nuevamente.';
+                        elseif ($err === 'campos_vacios') echo 'Por favor rellene todos los campos obligatorios.';
+                        elseif ($err === 'correo_invalido') echo 'El formato de correo no es válido.';
+                        elseif ($err === 'password_corto') echo 'La contraseña debe tener al menos 6 caracteres.';
+                        elseif ($err === 'correo_duplicado') echo 'Este correo electrónico ya está registrado.';
+                        else echo 'Ocurrió un error al procesar el registro. Intente de nuevo.';
+                        ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
         <!-- FORMULARIO DE REGISTRO -->
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
                 <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
                     <form id="registroForm" action="../../Backend/registro_proceso.php" method="POST">
+                        
+                        <!-- Token CSRF oculto -->
+                        <input type="hidden" name="csrf_token" value="<?php echo obtener_token_csrf(); ?>">
 
                         <!-- FILA: NOMBRE + APELLIDO -->
                         <div class="row g-3 mb-4">
@@ -127,7 +154,7 @@
                             </div>
                             <div class="form-text text-muted">
                                 <i class="fas fa-info-circle me-1"></i>
-                                Mínimo 6 caracteres, incluye una letra y un número.
+                                Mínimo 6 caracteres.
                             </div>
                             <div id="passwordError" class="text-danger small mt-1" style="display: none;">
                                 <i class="fas fa-exclamation-circle me-1"></i>
@@ -217,6 +244,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/registrarse.js"></script>
     
 </body>
 </html>

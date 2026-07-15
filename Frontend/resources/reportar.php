@@ -1,3 +1,8 @@
+<?php
+include_once('../../Backend/seguridad.php');
+// Validar que el usuario tenga una sesión activa
+validar_sesion_activa("iniciar_sesion.php");
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,9 +41,11 @@
                             <a class="nav-link active" href="reportar.php">Reportar</a>
                         </li>
                     </ul>
-                    <span class="navbar-text">
-                        <a class="nav-link profile-icon" href="iniciar_sesion.php">
-                            <i class="fas fa-user-circle"></i>
+                    <span class="navbar-text d-flex align-items-center gap-3">
+                        <span class="text-white small">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></span>
+                        <a class="btn btn-outline-light btn-sm rounded-pill px-3" href="mis_reportes.php">Mis Reportes</a>
+                        <a class="nav-link profile-icon" href="../../Backend/logout.php" title="Cerrar sesión">
+                            <i class="fas fa-sign-out-alt text-white"></i>
                         </a>
                     </span>
                 </div>
@@ -61,11 +68,44 @@
             </div>
         </div>
 
+        <!-- ALERTAS DE ERROR / ÉXITO -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <?php
+                        $err = $_GET['error'];
+                        if ($err === 'csrf') echo 'Sesión o formulario expirado. Intente nuevamente.';
+                        elseif ($err === 'campos_vacios') echo 'Por favor complete todos los campos obligatorios.';
+                        elseif ($err === 'categoria_invalida') echo 'El tipo de incidente seleccionado no es válido.';
+                        elseif ($err === 'tamano_imagen') echo 'La foto excede el límite permitido de 2MB.';
+                        elseif ($err === 'extension_invalida') echo 'El formato de archivo no está permitido. Use JPG, PNG o GIF.';
+                        elseif ($err === 'formato_imagen') echo 'El archivo subido no es una imagen válida.';
+                        else echo 'Ocurrió un error al guardar el reporte. Intente de nuevo.';
+                        ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_GET['envio']) && $_GET['envio'] === 'exitoso'): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        ¡Reporte creado exitosamente! Se mostrará en el inicio y el mapa interactivo.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
         <!-- FORMULARIO DE REPORTE -->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
                 <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
                     <form id="reporteForm" action="../../Backend/reporte_proceso.php" method="POST" enctype="multipart/form-data">
+                        
+                        <!-- Token CSRF oculto -->
+                        <input type="hidden" name="csrf_token" value="<?php echo obtener_token_csrf(); ?>">
 
                         <!-- CATEGORÍA -->
                         <div class="mb-4">
@@ -115,23 +155,24 @@
                                       rows="4" 
                                       placeholder="Describe el incidente con detalle..." 
                                       required></textarea>
-                            <div class="form-text text-muted">
-                                
-                            </div>
                         </div>
 
                         <!-- FOTO OPCIONAL -->
                         <div class="mb-4">
                             <label for="foto" class="form-label fw-bold">
                                 <i class="text-primary "></i>
-                                Foto (opcional)
+                                Foto (opcional, máx. 2MB)
                             </label>
                             <div class="d-flex align-items-center gap-3">
-                                <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
+                                <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg, image/gif">
                                 <span class="text-muted small">
                                     <i class="fas fa-image me-1"></i>
-                                    PNG, JPG, JPEG
+                                    PNG, JPG, JPEG, GIF
                                 </span>
+                            </div>
+                            <div id="fotoError" class="text-danger small mt-1" style="display: none;">
+                                <i class="fas fa-exclamation-circle me-1"></i>
+                                Archivo no válido. El tamaño máximo es 2MB y el formato debe ser imagen.
                             </div>
                         </div>
 
@@ -140,12 +181,6 @@
                             <button type="submit" class="btn btn-dark btn-lg rounded-pill py-3">
                                 Enviar reporte
                             </button>
-                        </div>
-
-                        <!-- MENSAJE DE CONFIRMACIÓN -->
-                        <div id="mensajeConfirmacion" class="alert alert-success mt-4" style="display: none;">
-                            <i class="fas fa-check-circle me-2"></i>
-                            ¡Reporte enviado con éxito! Gracias por tu colaboración.
                         </div>
 
                     </form>
@@ -190,7 +225,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-   
+    <!-- Custom JS -->
+    <script src="../js/reportar.js"></script>
 </body>
 </html>

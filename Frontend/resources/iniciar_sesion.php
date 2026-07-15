@@ -1,3 +1,6 @@
+<?php
+include_once('../../Backend/seguridad.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -65,11 +68,42 @@
             </div>
         </div>
 
+        <!-- ALERTAS DINÁMICAS DE ERROR/ÉXITO -->
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <?php
+                        $err = $_GET['error'];
+                        if ($err === 'csrf') echo 'Sesión o formulario expirado. Intente nuevamente.';
+                        elseif ($err === 'campos_vacios') echo 'Por favor ingrese todos los campos.';
+                        elseif ($err === 'credenciales') echo 'Correo electrónico o contraseña incorrectos.';
+                        elseif ($err === 'sesion_requerida') echo 'Debes iniciar sesión para acceder a esa sección.';
+                        else echo 'Ocurrió un error. Intente de nuevo.';
+                        ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_GET['registro']) && $_GET['registro'] === 'exitoso'): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        ¡Registro exitoso! Ya puedes iniciar sesión con tus credenciales.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
         <!-- FORMULARIO DE LOGIN -->
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
                 <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
                     <form id="loginForm" action="../../Backend/iniciarsesion_proceso.php" method="POST">
+
+                        <!-- Token CSRF oculto -->
+                        <input type="hidden" name="csrf_token" value="<?php echo obtener_token_csrf(); ?>">
 
                         <!-- CORREO ELECTRÓNICO -->
                         <div class="mb-4">
@@ -79,6 +113,10 @@
                             </label>
                             <input type="email" id="email" name="correo" class="form-control form-control-lg"
                                 placeholder="usuario@ejemplo.com" value="" required>
+                            <div id="emailError" class="text-danger small mt-1" style="display: none;">
+                                <i class="fas fa-exclamation-circle me-1"></i>
+                                Por favor ingresa un correo válido.
+                            </div>
                         </div>
 
                         <!-- CONTRASEÑA -->
@@ -89,6 +127,10 @@
                             </label>
                             <input type="password" id="password" name="password" class="form-control form-control-lg"
                                 placeholder="Ingresa tu contraseña" value="" required>
+                            <div id="passwordError" class="text-danger small mt-1" style="display: none;">
+                                <i class="fas fa-exclamation-circle me-1"></i>
+                                Ingresa tu contraseña de al menos 6 caracteres.
+                            </div>
                             <div class="form-text text-end">
                                 <a href="#" class="text-decoration-none text-muted">
                                     ¿Olvidaste tu contraseña?
@@ -177,8 +219,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
+    <!-- Custom JS -->
+    <script src="../js/iniciar_sesion.js"></script>
 </body>
 
 </html>

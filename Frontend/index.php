@@ -1,6 +1,6 @@
 <?php
-session_start();
-include('../Backend/conexion.php');
+include_once('../Backend/conexion.php');
+include_once('../Backend/seguridad.php');
 
 // Consultar los reportes guardados en la base de datos para el mapa de inicio
 $query_mapa = "SELECT id, tipo_incidente, calle, referencia, descripcion, foto_url FROM reportes WHERE estado = 'Pendiente' OR estado = 'En revisión'";
@@ -58,10 +58,18 @@ if ($result_mapa) {
                             <a class="nav-link" href="resources/reportar.php">Reportar</a>
                         </li>
                     </ul>
-                    <span class="navbar-text">
-                        <a class="nav-link profile-icon" href="resources/iniciar_sesion.php">
-                            <i class="fas fa-user-circle"></i>
-                        </a>
+                    <span class="navbar-text d-flex align-items-center gap-3">
+                        <?php if (isset($_SESSION['usuario_id'])): ?>
+                            <span class="text-white small">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></span>
+                            <a class="btn btn-light btn-sm rounded-pill px-3" href="resources/mis_reportes.php">Mis Reportes</a>
+                            <a class="nav-link profile-icon" href="../Backend/logout.php" title="Cerrar sesión">
+                                <i class="fas fa-sign-out-alt text-white"></i>
+                            </a>
+                        <?php else: ?>
+                            <a class="nav-link profile-icon" href="resources/iniciar_sesion.php">
+                                <i class="fas fa-user-circle"></i>
+                            </a>
+                        <?php endif; ?>
                     </span>
                 </div>
             </div>

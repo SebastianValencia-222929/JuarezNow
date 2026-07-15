@@ -1,6 +1,7 @@
 <?php
-// 1. Incluir la conexión desde la carpeta Backend (subiendo un nivel desde Frontend/resources/)
+// 1. Incluir la conexión y seguridad desde la carpeta Backend (subiendo un nivel desde Frontend/resources/)
 include(__DIR__ . '/../../Backend/conexion.php');
+include_once(__DIR__ . '/../../Backend/seguridad.php');
 
 // 2. Consultar los reportes guardados en la base de datos JuárezNow
 $query = "SELECT id, tipo_incidente, calle, referencia, descripcion, foto_url FROM reportes WHERE estado = 'Pendiente' OR estado = 'En revisión'";
@@ -55,10 +56,18 @@ if ($resultado) {
                         <li class="nav-item"><a class="nav-link" href="reportes.php">Reportes</a></li>
                         <li class="nav-item"><a class="nav-link" href="reportar.php">Reportar</a></li>
                     </ul>
-                    <span class="navbar-text">
-                        <a class="nav-link profile-icon" href="iniciar_sesion.php">
-                            <i class="fas fa-user-circle"></i>
-                        </a>
+                    <span class="navbar-text d-flex align-items-center gap-3">
+                        <?php if (isset($_SESSION['usuario_id'])): ?>
+                            <span class="text-white small">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></span>
+                            <a class="btn btn-light btn-sm rounded-pill px-3" href="mis_reportes.php">Mis Reportes</a>
+                            <a class="nav-link profile-icon" href="../../Backend/logout.php" title="Cerrar sesión">
+                                <i class="fas fa-sign-out-alt text-white"></i>
+                            </a>
+                        <?php else: ?>
+                            <a class="nav-link profile-icon" href="iniciar_sesion.php">
+                                <i class="fas fa-user-circle"></i>
+                            </a>
+                        <?php endif; ?>
                     </span>
                 </div>
             </div>

@@ -43,7 +43,7 @@ validar_sesion_activa("iniciar_sesion.php");
                     </ul>
                     <span class="navbar-text d-flex align-items-center gap-3">
                         <span class="text-white small">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></span>
-                        <a class="btn btn-outline-light btn-sm rounded-pill px-3" href="mis_reportes.php">Mis Reportes</a>
+                        <a class="btn btn-light btn-sm rounded-pill px-3" href="mis_reportes.php">Mis Reportes</a>
                         <a class="nav-link profile-icon" href="../../Backend/logout.php" title="Cerrar sesión">
                             <i class="fas fa-sign-out-alt text-white"></i>
                         </a>

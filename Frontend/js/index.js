@@ -1,3 +1,17 @@
+function escapeHTML(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, function(m) {
+        switch (m) {
+            case '&': return '&amp;';
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '"': return '&quot;';
+            case "'": return '&#039;';
+            default: return m;
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
@@ -27,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let iconoFA = 'fa-info-circle';
         let colorClase = 'bg-secondary text-white';
         let tipo_str = 'Otro';
-
+        
         const tipo = reporte.tipo_incidente;
         if (tipo === 'accidente') {
             iconoFA = 'fa-car-crash';
@@ -50,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const iconHTML = `<div class="d-flex align-items-center justify-content-center rounded-circle border border-white shadow ${colorClase}" style="width: 36px; height: 36px; font-size: 16px;">
                             <i class="fas ${iconoFA}"></i>
                           </div>`;
-
+                          
         const customIcon = L.divIcon({
             html: iconHTML,
             className: 'custom-map-icon',
@@ -61,16 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const marker = L.marker([latSimulada, lngSimulada], { icon: customIcon }).addTo(map);
 
+        // Prevenir XSS escapando las variables dinámicas
+        const calleEscaped = escapeHTML(reporte.calle);
+        const referenciaEscaped = reporte.referencia ? escapeHTML(reporte.referencia) : '';
+        const descripcionEscaped = escapeHTML(reporte.descripcion);
+
         let contenidoPopup = `
             <div style="font-family: sans-serif; min-width: 200px;">
                 <strong style="font-size: 14px; text-transform: uppercase; color: #333;">${tipo_str}</strong><br>
-                <span style="color: #666; font-size: 12px;"><i class="fas fa-map-marker-alt"></i> ${reporte.calle}</span><br>
-                ${reporte.referencia ? `<small style="color: #888;">Ref: ${reporte.referencia}</small><br>` : ''}
-                <p style="margin-top: 8px; font-size: 13px; color: #444;">${reporte.descripcion}</p>
+                <span style="color: #666; font-size: 12px;"><i class="fas fa-map-marker-alt"></i> ${calleEscaped}</span><br>
+                ${referenciaEscaped ? `<small style="color: #888;">Ref: ${referenciaEscaped}</small><br>` : ''}
+                <p style="margin-top: 8px; font-size: 13px; color: #444;">${descripcionEscaped}</p>
         `;
 
         if (reporte.foto_url) {
-            // Ruta relativa al Backend/ desde Frontend/index.php es ../Backend/
             contenidoPopup += `<img src="../Backend/${reporte.foto_url}" alt="Evidencia" style="width: 100%; height: auto; border-radius: 8px; margin-top: 5px;">`;
         }
 

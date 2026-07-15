@@ -1,12 +1,37 @@
 <?php
 include_once('../../Backend/seguridad.php');
+include_once('../../Backend/conexion.php');
+
 // Validar que el usuario tenga una sesión activa
 validar_sesion_activa("iniciar_sesion.php");
+
+$usuario_id = $_SESSION['usuario_id'];
+$reporte_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+// Buscar el reporte en la base de datos
+$sql = "SELECT * FROM reportes WHERE id = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $reporte_id);
+$stmt->execute();
+$resultado = $stmt->get_result();
+
+if ($resultado->num_rows === 0) {
+    header("Location: mis_reportes.php?error=no_encontrado");
+    exit();
+}
+
+$reporte = $resultado->fetch_assoc();
+
+// Verificar que el usuario actual sea el creador del reporte
+if ($reporte['usuario_id'] != $usuario_id) {
+    header("Location: mis_reportes.php?error=no_propietario");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>JuárezNow - Reportar incidente</title>
+    <title>JuárezNow - Editar Reporte</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -16,7 +41,7 @@ validar_sesion_activa("iniciar_sesion.php");
 </head>
 
 <body>
-    <!-- ===== HEADER  ===== -->
+    <!-- ===== HEADER ===== -->
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -38,7 +63,7 @@ validar_sesion_activa("iniciar_sesion.php");
                             <a class="nav-link" href="reportes.php">Reportes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="reportar.php">Reportar</a>
+                            <a class="nav-link" href="reportar.php">Reportar</a>
                         </li>
                     </ul>
                     <span class="navbar-text d-flex align-items-center gap-3">
@@ -53,72 +78,43 @@ validar_sesion_activa("iniciar_sesion.php");
         </nav>
     </header>
 
-    <!-- ===== MAIN (FORMULARIO DE REPORTE) ===== -->
+    <!-- ===== MAIN ===== -->
     <main class="container py-4">
 
         <!-- TÍTULO -->
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h2 class="display-5 ">
-                    <i class=" text-primary "></i>
-                    Crear reporte
+                <h2 class="display-5">
+                    <i class="fas fa-edit text-primary me-2"></i>
+                    Editar Reporte
                 </h2>
-                <p class="text-muted">Reporta un incidente en Ciudad Juárez y ayuda a tu comunidad</p>
+                <p class="text-muted">Modifica los detalles del incidente reportado</p>
                 <hr class="w-50 mx-auto">
             </div>
         </div>
 
-        <!-- ALERTAS DE ERROR / ÉXITO -->
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
-                <?php if (isset($_GET['error'])): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        <?php
-                        $err = $_GET['error'];
-                        if ($err === 'csrf') echo 'Sesión o formulario expirado. Intente nuevamente.';
-                        elseif ($err === 'campos_vacios') echo 'Por favor complete todos los campos obligatorios.';
-                        elseif ($err === 'categoria_invalida') echo 'El tipo de incidente seleccionado no es válido.';
-                        elseif ($err === 'tamano_imagen') echo 'La foto excede el límite permitido de 2MB.';
-                        elseif ($err === 'extension_invalida') echo 'El formato de archivo no está permitido. Use JPG, PNG o GIF.';
-                        elseif ($err === 'formato_imagen') echo 'El archivo subido no es una imagen válida.';
-                        else echo 'Ocurrió un error al guardar el reporte. Intente de nuevo.';
-                        ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php endif; ?>
-
-                <?php if (isset($_GET['envio']) && $_GET['envio'] === 'exitoso'): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="fas fa-check-circle me-2"></i>
-                        ¡Reporte creado exitosamente! Se mostrará en el inicio y el mapa interactivo.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-
-        <!-- FORMULARIO DE REPORTE -->
+        <!-- FORMULARIO DE EDICIÓN -->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
                 <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
-                    <form id="reporteForm" action="../../Backend/reporte_proceso.php" method="POST" enctype="multipart/form-data">
+                    <form id="reporteForm" action="../../Backend/editar_reporte_proceso.php" method="POST" enctype="multipart/form-data">
                         
                         <!-- Token CSRF oculto -->
                         <input type="hidden" name="csrf_token" value="<?php echo obtener_token_csrf(); ?>">
+                        
+                        <!-- ID del Reporte oculto -->
+                        <input type="hidden" name="id" value="<?php echo $reporte['id']; ?>">
 
                         <!-- CATEGORÍA -->
                         <div class="mb-4">
                             <label for="categoria" class="form-label fw-bold">
-                                <i class="text-primary "></i>
                                 Tipo de incidente
                             </label>
                             <select id="categoria" name="tipo_incidente" class="form-select form-select-lg rounded-pill" required>
-                                <option value="">Selecciona una categoría</option>
-                                <option value="accidente">Accidente automovilístico</option>
-                                <option value="inundacion">Inundación</option>
-                                <option value="trafico">Tráfico</option>
-                                <option value="hundimiento">Hundimiento</option>
+                                <option value="accidente" <?php echo ($reporte['tipo_incidente'] === 'accidente') ? 'selected' : ''; ?>>Accidente automovilístico</option>
+                                <option value="inundacion" <?php echo ($reporte['tipo_incidente'] === 'inundacion') ? 'selected' : ''; ?>>Inundación</option>
+                                <option value="trafico" <?php echo ($reporte['tipo_incidente'] === 'trafico') ? 'selected' : ''; ?>>Tráfico</option>
+                                <option value="hundimiento" <?php echo ($reporte['tipo_incidente'] === 'hundimiento') ? 'selected' : ''; ?>>Hundimiento</option>
                             </select>
                         </div>
 
@@ -126,42 +122,48 @@ validar_sesion_activa("iniciar_sesion.php");
                         <div class="row g-3 mb-4">
                             <div class="col-md-6">
                                 <label for="calle" class="form-label fw-bold">
-                                    <i class="text-primary "></i>
                                     Calle
                                 </label>
                                 <input type="text" id="calle" name="calle" 
                                        class="form-control form-control-lg rounded-pill" 
-                                       placeholder="Ej. Av. De las Torres" required>
+                                       placeholder="Ej. Av. De las Torres" 
+                                       value="<?php echo htmlspecialchars($reporte['calle']); ?>" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="referencia" class="form-label fw-bold">
-                                    <i class="text-primary "></i>
                                     Referencia
                                 </label>
                                 <input type="text" id="referencia" name="referencia" 
                                        class="form-control form-control-lg rounded-pill" 
-                                       placeholder="Entre calles o punto de referencia">
+                                       placeholder="Entre calles o punto de referencia"
+                                       value="<?php echo htmlspecialchars($reporte['referencia'] ?? ''); ?>">
                             </div>
                         </div>
 
                         <!-- DESCRIPCIÓN -->
                         <div class="mb-4">
                             <label for="descripcion" class="form-label fw-bold">
-                                <i class=" text-primary "></i>
                                 Descripción
                             </label>
                             <textarea id="descripcion" name="descripcion" 
                                       class="form-control form-control-lg" 
                                       rows="4" 
                                       placeholder="Describe el incidente con detalle..." 
-                                      required></textarea>
+                                      required><?php echo htmlspecialchars($reporte['descripcion']); ?></textarea>
                         </div>
 
-                        <!-- FOTO OPCIONAL -->
+                        <!-- FOTO ACTUAL -->
+                        <?php if (!empty($reporte['foto_url'])): ?>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold d-block">Foto actual</label>
+                                <img src="../../Backend/<?php echo htmlspecialchars($reporte['foto_url']); ?>" alt="Foto del incidente" class="rounded border shadow-sm" style="max-width: 250px; height: auto;">
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- FOTO NUEVA (OPCIONAL) -->
                         <div class="mb-4">
                             <label for="foto" class="form-label fw-bold">
-                                <i class="text-primary "></i>
-                                Foto (opcional, máx. 2MB)
+                                Nueva Foto (opcional, reemplaza la anterior, máx. 2MB)
                             </label>
                             <div class="d-flex align-items-center gap-3">
                                 <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg, image/gif">
@@ -176,22 +178,17 @@ validar_sesion_activa("iniciar_sesion.php");
                             </div>
                         </div>
 
-                        <!-- BOTÓN ENVIAR -->
-                        <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-dark btn-lg rounded-pill py-3">
-                                Enviar reporte
+                        <!-- BOTONES -->
+                        <div class="d-flex gap-3 mt-4">
+                            <button type="submit" class="btn btn-dark btn-lg rounded-pill py-3 flex-grow-1">
+                                Guardar Cambios
                             </button>
+                            <a href="mis_reportes.php" class="btn btn-outline-secondary btn-lg rounded-pill py-3 flex-grow-1 text-center">
+                                Cancelar
+                            </a>
                         </div>
 
                     </form>
-                </div>
-
-                <!-- BOTÓN VOLVER AL INICIO -->
-                <div class="text-center mt-4">
-                    <a href="../index.php" class="btn btn-outline-secondary rounded-pill px-4">
-                        <i class="fas fa-arrow-left me-2"></i>
-                        Volver al inicio
-                    </a>
                 </div>
             </div>
         </div>
@@ -225,7 +222,7 @@ validar_sesion_activa("iniciar_sesion.php");
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
+    <!-- Custom JS (reutilizamos la misma validación de reportar.js) -->
     <script src="../js/reportar.js"></script>
 </body>
 </html>

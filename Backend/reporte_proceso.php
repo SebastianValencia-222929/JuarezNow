@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         
         // Creamos una carpeta llamada 'uploads' dentro de Backend si no existe
-        $directorio_subida = 'uploads/';
+        $directorio_subida = __DIR__ . '/uploads/';
         if (!file_exists($directorio_subida)) {
             mkdir($directorio_subida, 0777, true);
         }
@@ -40,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Mover el archivo temporal a la carpeta definitiva
         if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_destino)) {
-            // Guardamos esta ruta para insertarla en la base de datos
-            $foto_url = $ruta_destino; 
+            // Guardamos esta ruta para insertarla en la base de datos (relativa a Backend/)
+            $foto_url = 'uploads/' . $nuevo_nombre_foto; 
         }
     }
 

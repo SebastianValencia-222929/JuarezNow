@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <title>JuárezNow - Iniciar sesión</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -18,7 +19,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand text-white fw-bold" href="../index.html">
+                <a class="navbar-brand text-white fw-bold" href="../index.php">
                     JuárezNow
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
@@ -27,20 +28,20 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="../index.html">Inicio</a>
+                            <a class="nav-link" href="../index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="mapa.html">Mapa</a>
+                            <a class="nav-link" href="mapa.php">Mapa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="reportes.html">Reportes</a>
+                            <a class="nav-link" href="reportes.php">Reportes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="reportar.html">Reportar</a>
+                            <a class="nav-link" href="reportar.php">Reportar</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a class="nav-link profile-icon active" href="iniciar_sesion.html">
+                        <a class="nav-link profile-icon active" href="iniciar_sesion.php">
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </span>
@@ -76,11 +77,8 @@
                                 <i class="fas fa-envelope me-2"></i>
                                 Correo electrónico
                             </label>
-                            <input type="email" id="email" name="email" 
-                                   class="form-control form-control-lg" 
-                                   placeholder="usuario@ejemplo.com" 
-                                   value="carlos@juarez.com"
-                                   required>
+                            <input type="email" id="email" name="email" class="form-control form-control-lg"
+                                placeholder="usuario@ejemplo.com" value="carlos@juarez.com" required>
                         </div>
 
                         <!-- CONTRASEÑA -->
@@ -89,11 +87,8 @@
                                 <i class="fas fa-lock me-2"></i>
                                 Contraseña
                             </label>
-                            <input type="password" id="password" name="password" 
-                                   class="form-control form-control-lg" 
-                                   placeholder="Ingresa tu contraseña" 
-                                   value="123456"
-                                   required>
+                            <input type="password" id="password" name="password" class="form-control form-control-lg"
+                                placeholder="Ingresa tu contraseña" value="" required>
                             <div class="form-text text-end">
                                 <a href="#" class="text-decoration-none text-muted">
                                     ¿Olvidaste tu contraseña?
@@ -120,8 +115,8 @@
                     <!-- ENLACE A REGISTRO -->
                     <div class="text-center mt-4">
                         <p class="mb-0">
-                            ¿No tienes una cuenta? 
-                            <a href="registrarse.html" class="fw-bold text-decoration-none">
+                            ¿No tienes una cuenta?
+                            <a href="registrarse.php" class="fw-bold text-decoration-none">
                                 Regístrate aquí
                             </a>
                         </p>
@@ -129,7 +124,7 @@
 
                     <!-- VOLVER AL INICIO -->
                     <div class="text-center mt-3">
-                        <a href="../index.html" class="text-muted text-decoration-none">
+                        <a href="../index.php" class="text-muted text-decoration-none">
                             <i class="fas fa-arrow-left me-1"></i>
                             Volver al inicio
                         </a>
@@ -145,7 +140,7 @@
                     <p class="mb-0">
                         <i class="fas fa-user-plus me-2"></i>
                         ¿Nuevo en JuárezNow?
-                        <a href="registrarse.html" class="fw-bold text-decoration-none">
+                        <a href="registrarse.php" class="fw-bold text-decoration-none">
                             Crear cuenta
                         </a>
                     </p>
@@ -183,6 +178,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    
+
 </body>
+
 </html>

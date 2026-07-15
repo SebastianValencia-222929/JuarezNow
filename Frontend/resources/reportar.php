@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand text-white fw-bold" href="#">
+                <a class="navbar-brand text-white fw-bold" href="../index.php">
                     JuárezNow
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
@@ -24,20 +24,20 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="../index.html">Inicio</a>
+                            <a class="nav-link" href="../index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="mapa.html">Mapa</a>
+                            <a class="nav-link" href="mapa.php">Mapa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="reportes.html">Reportes</a>
+                            <a class="nav-link" href="reportes.php">Reportes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="reportar.html">Reportar</a>
+                            <a class="nav-link active" href="reportar.php">Reportar</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a class="nav-link profile-icon" href="iniciar_sesion.html">
+                        <a class="nav-link profile-icon" href="iniciar_sesion.php">
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </span>
@@ -65,7 +65,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
                 <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
-                    <form id="reporteForm" onsubmit="return false;">
+                    <form id="reporteForm" action="../../Backend/reporte_proceso.php" method="POST" enctype="multipart/form-data">
 
                         <!-- CATEGORÍA -->
                         <div class="mb-4">
@@ -73,7 +73,7 @@
                                 <i class="text-primary "></i>
                                 Tipo de incidente
                             </label>
-                            <select id="categoria" name="categoria" class="form-select form-select-lg rounded-pill" required>
+                            <select id="categoria" name="tipo_incidente" class="form-select form-select-lg rounded-pill" required>
                                 <option value="">Selecciona una categoría</option>
                                 <option value="accidente">Accidente automovilístico</option>
                                 <option value="inundacion">Inundación</option>
@@ -127,9 +127,7 @@
                                 Foto (opcional)
                             </label>
                             <div class="d-flex align-items-center gap-3">
-                                <input type="file" id="foto" name="foto" 
-                                       class="form-control form-control-lg" 
-                                       accept="image/*">
+                                <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg">
                                 <span class="text-muted small">
                                     <i class="fas fa-image me-1"></i>
                                     PNG, JPG, JPEG
@@ -155,7 +153,7 @@
 
                 <!-- BOTÓN VOLVER AL INICIO -->
                 <div class="text-center mt-4">
-                    <a href="../index.html" class="btn btn-outline-secondary rounded-pill px-4">
+                    <a href="../index.php" class="btn btn-outline-secondary rounded-pill px-4">
                         <i class="fas fa-arrow-left me-2"></i>
                         Volver al inicio
                     </a>

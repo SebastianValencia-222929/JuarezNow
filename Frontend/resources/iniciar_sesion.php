@@ -46,7 +46,7 @@ include_once('../../Backend/seguridad.php');
                     <span class="navbar-text d-flex align-items-center gap-3">
                         <?php if (isset($_SESSION['usuario_id'])): ?>
                             <span class="text-white small">Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></span>
-                            <a class="btn btn-light btn-sm rounded-pill px-3" href="mis_reportes.php">Mis Reportes</a>
+                            <a class="btn bg-white text-dark btn-sm rounded-pill px-3" href="mis_reportes.php">Mis Reportes</a>
                             <a class="nav-link profile-icon" href="../../Backend/logout.php" title="Cerrar sesión">
                                 <i class="fas fa-sign-out-alt text-white"></i>
                             </a>

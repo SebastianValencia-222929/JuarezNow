@@ -2,26 +2,40 @@
 // 1. Iniciar la sesión antes de cualquier otra cosa
 session_start();
 
-// 2. Incluir la conexión (está en la misma carpeta Backend)
+// 2. Incluir la conexión y seguridad
 include('conexion.php');
+include('seguridad.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 3. Capturar únicamente los dos campos que viste en tu interfaz
-    $correo = $_POST['correo'];
-    $password = $_POST['password'];
+    // 3. Validar Token CSRF
+    $token_recibido = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
+    if (!validar_token_csrf($token_recibido)) {
+        header("Location: ../Frontend/resources/iniciar_sesion.php?error=csrf");
+        exit();
+    }
 
-    // 4. Buscar al usuario en la base de datos por su correo electrónico
+    // 4. Capturar y sanitizar datos
+    $correo   = sanitizar_entrada($_POST['correo']);
+    $password = $_POST['password']; // No sanitizar contraseñas
+
+    // 5. Validaciones básicas en el servidor
+    if (empty($correo) || empty($password)) {
+        header("Location: ../Frontend/resources/iniciar_sesion.php?error=campos_vacios");
+        exit();
+    }
+
+    // 6. Buscar al usuario en la base de datos por su correo electrónico (con Prepared Statements)
     $sql = "SELECT id, nombre, apellido, password FROM usuarios WHERE correo = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $correo);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
-    // 5. Verificar si el correo existe
+    // 7. Verificar si el correo existe
     if ($resultado->num_rows === 1) {
         $usuario = $resultado->fetch_assoc();
 
-        // 6. Verificar si la contraseña ingresada coincide con el hash encriptado de la BD
+        // 8. Verificar si la contraseña ingresada coincide con el hash encriptado de la BD
         if (password_verify($password, $usuario['password'])) {
             
             // ¡Login correcto! Guardamos los datos clave en la sesión
@@ -29,7 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['usuario_nombre'] = $usuario['nombre'];
             $_SESSION['usuario_apellido'] = $usuario['apellido'];
 
-            // Redirigir a la página de inicio o al mapa del Frontend
+            $stmt->close();
+            $conexion->close();
+            
+            // Redirigir a la página de reportes o de reportar del Frontend
             header("Location: ../Frontend/resources/reportar.php"); 
             exit();
         } else {

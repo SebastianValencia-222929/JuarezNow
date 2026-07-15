@@ -78,7 +78,7 @@
                                 Correo electrónico
                             </label>
                             <input type="email" id="email" name="correo" class="form-control form-control-lg"
-                                placeholder="usuario@ejemplo.com" value="carlos@juarez.com" required>
+                                placeholder="usuario@ejemplo.com" value="" required>
                         </div>
 
                         <!-- CONTRASEÑA -->
